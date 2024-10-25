@@ -57,17 +57,6 @@ function moveBall() {
 			ball.y = canvas.height / 2;
 		}
 	}
-	// console.log(`leftPaddle: ${leftPaddle.x}, ${leftPaddle.y}\nrightPaddle: ${rightPaddle.x}, ${rightPaddle.y}\nball:${ball.x}, ${ball.y}`)
-	// if (ball.x >= paddleWidth || ball.x <= canvas.width - paddleWidth) {
-	// 	if (ball.y >= leftPaddle.y || ball.y <= leftPaddle.y + paddleHeight) {
-	// 		speed.ball.x = -speed.ball.x;
-	// 		console.log('left hit');
-	// 	}
-	// 	if (ball.y >= rightPaddle.y || ball.y <= rightPaddle.y + paddleHeight) {
-	// 		speed.ball.x = -speed.ball.x;
-	// 		console.log('right hit');
-	// 	}
-	// }
 }
 
 window.addEventListener('keydown', (e) => {
