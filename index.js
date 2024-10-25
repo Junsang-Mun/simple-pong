@@ -39,7 +39,7 @@ function movePaddle(left, right) {
 function moveBall() {
 	ball.x += speed.ball.x;
 	ball.y += speed.ball.y;
-	if (ball.y < 0 || ball.y > canvas.height) {
+	if (ball.y < ballRadius || ball.y > canvas.height - ballRadius) {
 		speed.ball.y = -speed.ball.y;
 	}
 	if (ball.x <= paddleWidth) {
