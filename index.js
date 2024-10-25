@@ -1,3 +1,16 @@
+/* Scoreborad */
+const left = document.getElementById('left-score');
+const right = document.getElementById('right-score');
+
+function leftWin() {
+	left.textContent = Number(left.textContent) + 1;
+}
+
+function rightWin() {
+	right.textContent = Number(right.textContent) + 1;
+}
+
+/* Pong Game Play */
 const canvas = document.getElementById('pongCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -43,20 +56,35 @@ function moveBall() {
 		speed.ball.y = -speed.ball.y;
 	}
 	if (ball.x <= paddleWidth) {
-		if (ball.y >= leftPaddle.y && ball.y <= leftPaddle.y + paddleHeight)
+		if (ball.y >= leftPaddle.y && ball.y <= leftPaddle.y + paddleHeight) {
 			speed.ball.x = -speed.ball.x;
+			const edge = Math.abs(ball.y - (leftPaddle.y + paddleHeight / 2)) / 100 + 1
+			speed.ball.x *= edge;
+			speed.ball.y *= edge;
+		}
 		else {
-			ball.x = canvas.width / 2;
-			ball.y = canvas.height / 2;
+			rightWin();
+			resetGame();
 		}
 	} else if (ball.x >= canvas.width - paddleWidth) {
-		if (ball.y >= rightPaddle.y && ball.y <= rightPaddle.y + paddleHeight)
+		if (ball.y >= rightPaddle.y && ball.y <= rightPaddle.y + paddleHeight) {
 			speed.ball.x = -speed.ball.x;
+			const edge = Math.abs(ball.y - (rightPaddle.y + paddleHeight / 2)) / 100 + 1
+			speed.ball.x *= edge;
+			speed.ball.y *= edge;
+		}
 		else {
-			ball.x = canvas.width / 2;
-			ball.y = canvas.height / 2;
+			leftWin();
+			resetGame();
 		}
 	}
+}
+
+function resetGame() {
+	leftPaddle.x = 0; leftPaddle.y = (canvas.height - paddleHeight) / 2;
+	rightPaddle.x = canvas.width - paddleWidth; rightPaddle.y = (canvas.height - paddleHeight) / 2;
+	ball.x = canvas.width / 2; ball.y = canvas.height / 2;
+	speed.paddle = 10; speed.ball.x = 5; speed.ball.y = 5;
 }
 
 window.addEventListener('keydown', (e) => {
